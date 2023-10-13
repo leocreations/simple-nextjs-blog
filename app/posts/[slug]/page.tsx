@@ -7,7 +7,9 @@ import Image from "next/image";
 async function getData(slug: string) {
   const query = `*[_type == "post" && slug.current == "${slug}"][0]`; // [0] para no obtener un array
 
-  const data = await client.fetch(query);
+  const data = await client.fetch(query, {
+    next: { revalidate: 5}
+  });
 
   return data;
 }
